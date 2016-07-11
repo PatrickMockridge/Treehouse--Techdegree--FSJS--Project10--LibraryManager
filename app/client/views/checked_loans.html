@@ -1,0 +1,25 @@
+    <h1>Checked Out Books</h1>
+    <p> <a ng-href="#/new_loan" class="button">Create New Loan</a></p>
+    <p>Filters <a ng-href="#/loans">All</a> | <a ng-href="#/loans/overdue">Overdue</a> | <a ng-href="#/loans/checked_out">Checked Out</a></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Patron </th>
+                <th>Loaned on</th>
+                <th>Return by </th>
+                <th>Returned on</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in getBooks">
+                <td><a ng-href="#/books/{{book._id}}">{{book.title}}</a></td>
+                <td><a ng-href="#/patrons{{patron._id}}">{{patron.first_name}} {{patron.last_name}}</a></td>
+                <td>2015-12-10</td>
+                <td>2020-10-20</td>
+                <td></td>
+                <td><a href="return_book.html" class="button">Return Book</a></td>
+            </tr>
+        </tbody>
+    </table>

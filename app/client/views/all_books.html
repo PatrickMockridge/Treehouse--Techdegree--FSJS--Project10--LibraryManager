@@ -1,0 +1,23 @@
+<h1>Books</h1>
+  <ng-controller="bookController">
+    <p> <a ng-href="#/new_book" class="button" class="button">Create New Book</a></p>
+    <p>Filters <a ng-href="#/books">All</a> | <a ng-href="#/books/overdue">Overdue</a> | <a href="#/books/checked_out">Checked Out</a></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Year Released</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat book in books>
+                <td><a ng-href="#/books/{{book.id}}">{{book.title}}</a></td>
+                <td>{{book.author}}</td>
+                <td>{{book.genre}}</td>
+                <td>{{book.first_published}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </ng-controller>

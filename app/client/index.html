@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Manager</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+
+<nav>
+  <ul>
+    <li><a ui-route ng-href="/">Home</a></li>
+    <li><a ui-route ng-href="#/books">Books</a></li>
+    <li><a ui-route ng-href="#/patrons">Patrons</a></li>
+    <li><a ui-route ng-href="#/loans">Loans</a></li>
+  </ul>
+</nav>
+
+<body>
+
+  <div ng-view></div>
+
+</body>
+<script src = "./node_modules/angular/angular.min.js"></script>
+<script src = "./node_modules/angular-route/angular-route.min.js"></script>
+<script src = "./node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+<script src = "./node_modules/jquery/jquery.min.js"></script>
+<script src = "/scripts/app.js"></script>
+</html>

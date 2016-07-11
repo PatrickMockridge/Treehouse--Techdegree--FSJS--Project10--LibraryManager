@@ -1,0 +1,22 @@
+    <h1>Patrons</h1>
+    <p> <a ng-href="#/patrons/new" class="button">Create New Patron</a></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Name </th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Library ID</th>
+                <th>Zip</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat patron in getPatrons>
+                <td><a ng-href="#/patrons/{{patron.id}}">{{patron.first_name}} {{patron.last_name}}</a></td>
+                <td>{{patron.address}}</td>
+                <td>{{patron.email}}</td>
+                <td>{{patron.library_id}}</td>
+                <td>{{patron.zip_code}}</td>
+            </tr>
+        </tbody>
+    </table>

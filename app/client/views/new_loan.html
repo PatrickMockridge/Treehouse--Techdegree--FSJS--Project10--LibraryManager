@@ -1,0 +1,11 @@
+    <h1>New Loan</h1>
+    <form>
+        <p> <label for="book_id">Book</label><select ng-model="loan.book_id"  id="book_id"><option ng-repeat="book in getBooks" value="{{book._id}}">{{book.title}}</option>
+        <p>
+        <label for="patron_id">Patron</label><select ng-model="loan.patron_id" id="patron_id"><option value="{{patron._id}}">{{patron.first_name}} {{patron.last_name}}</option>
+        <p>
+        <label for="loaned_on">Loaned on:</label><input id="loaned_on" type="text" ng-model="loan.loaned_on"></p>
+        <p>
+        <label for="return_by">Return by:</label><input id="return_by" type="text" value="loan.return_by"></p>
+        <p><input type="submit" value="Create New Loan" ng-submit="createLoan()"></p>
+    </form>
