@@ -8,7 +8,7 @@ var patrons = require('../models').patrons;
 /* GET all books. */
 
 router.get('/', function(req, res, next) {
-  books.findAll({order: [["book_title", "DESC"]]})
+  books.findAll({order: [["title", "DESC"]]})
   .then(function(books){
     res.json(books);
     })
@@ -33,7 +33,10 @@ router.get('/:id', function(req, res, next) {
 
 /* GET overdue books */
 router.get('/overdue', function(req, res, next) {
-  loans.findAll({ include: [{ model: books }], where: { return_by: { $lt: new Date() }, returned_on: null }})
+  loans.findAll({
+    //include: [{ model: books }],
+    where: { return_by: { $lt: new Date() }, returned_on: null }
+  })
   .then(function(overdueBooks){
     res.json(overdueBooks);
     })

@@ -91,6 +91,7 @@ app.controller('bookController', function($scope, $http,$location, $routeParams)
    this.getBookLoans = function(id, callback) {
      $http.get('http://localhost:5000/api/loans/' + id)
           .then(callback);
+        };
 
    //delete book from the database
   //  this.deleteID = function(id, callbackSuccess, callbackFailure) {
