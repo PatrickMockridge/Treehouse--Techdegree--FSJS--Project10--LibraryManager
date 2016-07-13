@@ -42,6 +42,11 @@
            controllerAs: 'vm',
            templateUrl: '/views/checked_books.html'
          })
+         .when('/overdue_loans', {
+           controller: 'bookController',
+           controllerAs: 'vm',
+           templateUrl: '/views/overdue_loans.html'
+         })
          .when('/patrons/:id', {
            controller: '',
            controllerAs: 'vm',
@@ -52,17 +57,17 @@
            controllerAs: 'vm',
            templateUrl: '/views/new_book.html'
          })
-         .when('/loans/new', {
+         .when('/new_loan', {
            controller: '',
            controllerAs: 'vm',
            templateUrl: '/views/new_loan.html'
          })
-         .when('/patrons/new', {
+         .when('/new_patron', {
            controller: '',
            controllerAs: 'vm',
            templateUrl: '/views/new_patron.html'
          })
-         .when('/books/return/:id', {
+         .when('/return/:id', {
            controller: 'bookController',
            controllerAs: 'vm',
            templateUrl: '/views/return_book.html'

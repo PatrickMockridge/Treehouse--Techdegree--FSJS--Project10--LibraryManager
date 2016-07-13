@@ -5,11 +5,44 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    book_id: DataTypes.INTEGER,
-    patron_id: DataTypes.INTEGER,
-    loaned_on: DataTypes.DATE,
-    return_by: DataTypes.DATE,
-    returned_on: DataTypes.DATE
+    book_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    patron_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    loaned_on: {
+      type: DataTypes.DATEONLY,
+      validate: {
+      notEmpty: {
+          msg: "Returned on date is required"
+        },
+        isDate: {
+          msg: "Please enter the date that the book was loaned on"
+        }
+      }
+    },
+    return_by: {
+      type: DataTypes.DATEONLY,
+      validate: {
+      notEmpty: {
+          msg: "Returned on date is required"
+        },
+        isDate: {
+          msg: "Please enter the date that the book will be returned by"
+        }
+      }
+    },
+    returned_on: {
+      type: DataTypes.DATEONLY,
+      validate: {
+        isDate: {
+          msg: "Please use a valid date."
+        }
+      }
+    }
   }, {
     classMethods: {
       associate: function(models) {
@@ -17,7 +50,8 @@ module.exports = function(sequelize, DataTypes) {
         loans.belongsTo(models.patrons, {foreignKey: 'patron_id'});
         loans.belongsTo(models.books, {foreignKey: 'book_id'});
       }
-    }
+    },
+    timestamps: false  // I do NOT want timestamps here
   });
   return loans;
 };

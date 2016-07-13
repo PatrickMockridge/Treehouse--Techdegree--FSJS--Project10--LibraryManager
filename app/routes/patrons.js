@@ -7,7 +7,7 @@ var patrons = require('../models').patrons;
 
 /* GET all patrons. */
 router.get('/', function(req, res, next) {
-  patrons.findAll({order: [["loaned_on", "DESC"]]}).then(function(loans){
+  patrons.findAll({order: [["last_name", "DESC"]]}).then(function(loans){
     res.json(loans);
     })
     .catch(function(error){

@@ -7,12 +7,12 @@
   </ul>
 </nav>
 
-    <h1>{{getID.title}}</h1>
+    <h1>{{bookDetails.title}}</h1>
     <form>
-        <p><label for="title">Title</label><input ng-model="getID.title" id="title" type="text"></p>
-        <p><label for="author">Author</label><input ng-model="book.author" id="author" type="text"></p>
-        <p><label for="genre">Genre</label><input ng-model="book.genre" id="genre" type="text" value="Non Fiction"></p>
-        <p><label for="first_published">First Published</label><input ng-model="book.first_published" id="first_published" type="text"></p>
+        <p><label for="title">Title</label><input ng-model="bookDetails.title" id="title" type="text"></p>
+        <p><label for="author">Author</label><input ng-model="bookDetails.author" id="author" type="text"></p>
+        <p><label for="genre">Genre</label><input ng-model="bookDetails.genre" id="genre" type="text" value="Non Fiction"></p>
+        <p><label for="first_published">First Published</label><input ng-model="bookDetails.first_published" id="first_published" type="text"></p>
         <p><input type="submit" value="Update" ng-submit=updateBook()></p>
     </form>
     <h2>Loan History</h2>
@@ -28,9 +28,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="loan in bookLoans">
-                <td><a ng-href="#/books/{{loan.book_id}}">{{loan.book_title}}</a></td>
-                <td><a href="#/patrons/{{loan.patron_id}}">{{patron.first_name}} {{patron.last_name}}</a></td>
+            <tr ng-repeat="loan in bookDetails.loans">
+                <td><a ng-href="#/books/{{loan.book_id}}">{{bookDetails.title}}</a></td>
+                <td><a href="#/patrons/{{loan.patron_id}}">{{loan.patron.first_name}} {{loan.patron.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td>{{loan.returned_on}}</td>

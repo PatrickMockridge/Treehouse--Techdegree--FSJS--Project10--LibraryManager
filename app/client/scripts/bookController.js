@@ -5,25 +5,21 @@ app.controller('bookController', function(dataServiceBooks, $scope, $http, $loca
   //get all books
   dataServiceBooks.getAll(function(response) {
     $scope.getAllbooks = response.data;
-    console.log($scope.getAllbooks[0]);
+    console.log($scope.getAllbooks);
   });
   //get checked-out books
-  // dataServiceBooks.getCheckedOutBooks(function(response) {
-  //   console.log(response.data);
-  //   $scope.checkedOutBooks = response.data;
-  // });
-  // //get overdue books
-  // dataServiceBooks.getOverDueBooks(function(response) {
-  //   console.log(response.data);
-  //   $scope.overdueBooks = response.data;
-  // });
+   dataServiceBooks.getCheckedOutBooks(function(response) {
+     console.log(response.data);
+     $scope.checkedOutBooks = response.data;
+   });
+   //get overdue books
+   dataServiceBooks.getOverDueBooks(function(response) {
+     console.log(response.data);
+     $scope.overdueBooks = response.data;
+   });
  //new book object
- // var newBook = {
- //   title: $scope.newBook.title,
- //   author: $scope.newBook.author,
- //   genre: $scope.newBook.genre,
- //   first_published: $scope.newBook.first_published,
- // };
+  $scope.newBook = new Object();
+
   $scope.addBook = function() {
       // add the recipe and then go to the detail screen
       dataServiceBooks.addBook(newBook, function(response) {
@@ -44,19 +40,12 @@ app.controller('bookController', function(dataServiceBooks, $scope, $http, $loca
 
   $scope.getID = function() {
     dataServiceBooks.getID($scope.ID, function(response) {
-    console.log(response);
-    $scope.bookObject = response;
+    console.log(response.data[0]);
+    $scope.bookDetails = response.data[0];
     });
   };
 
   $scope.getID();
-
-  $scope.getBookLoans = function() {
-    dataServiceBooks.getBookLoans($scope.ID, function(response) {
-    console.log(response.data);
-    $scope.bookLoans = response.data;
-    });
-  };
 })
 
 app.service('dataServiceBooks', function($http) {
