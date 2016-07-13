@@ -1,29 +1,29 @@
-var app = angular.module("app");
+var app = angular.module("app", ["ngRoute"]);
 
-app.controller('bookController', function($scope, $http,$location, $routeParams){
+app.controller('bookController', function(dataServiceBooks, $scope, $http, $location, $routeParams){
   $scope.ID = $routeParams.id;
   //get all books
-  dataServiceBooks.getBooks(function(response) {
-    console.log(response.data);
-    $scope.books = response.data;
+  dataServiceBooks.getAll(function(response) {
+    $scope.getAllbooks = response.data;
+    console.log($scope.getAllbooks[0]);
   });
   //get checked-out books
-  dataService.getCheckedOutBooks(function(response) {
-    console.log(response.data);
-    $scope.checkedOutBooks = response.data;
-  });
-  //get overdue books
-  dataServiceBooks.getOverDueBooks(function(response) {
-    console.log(response.data);
-    $scope.overdueBooks = response.data;
-  });
+  // dataServiceBooks.getCheckedOutBooks(function(response) {
+  //   console.log(response.data);
+  //   $scope.checkedOutBooks = response.data;
+  // });
+  // //get overdue books
+  // dataServiceBooks.getOverDueBooks(function(response) {
+  //   console.log(response.data);
+  //   $scope.overdueBooks = response.data;
+  // });
  //new book object
- var newBook = {
-   title: $scope.newBook.title,
-   author: $scope.newBook.author,
-   genre: $scope.newBook.genre,
-   first_published: $scope.newBook.first_published,
- }
+ // var newBook = {
+ //   title: $scope.newBook.title,
+ //   author: $scope.newBook.author,
+ //   genre: $scope.newBook.genre,
+ //   first_published: $scope.newBook.first_published,
+ // };
   $scope.addBook = function() {
       // add the recipe and then go to the detail screen
       dataServiceBooks.addBook(newBook, function(response) {
@@ -45,9 +45,11 @@ app.controller('bookController', function($scope, $http,$location, $routeParams)
   $scope.getID = function() {
     dataServiceBooks.getID($scope.ID, function(response) {
     console.log(response);
-    $scope.bookDetailObject = response;
+    $scope.bookObject = response;
     });
   };
+
+  $scope.getID();
 
   $scope.getBookLoans = function() {
     dataServiceBooks.getBookLoans($scope.ID, function(response) {
@@ -56,7 +58,8 @@ app.controller('bookController', function($scope, $http,$location, $routeParams)
     });
   };
 })
-.service('dataServiceBooks', function($http) {
+
+app.service('dataServiceBooks', function($http) {
     //get all books
    this.getAll = function(callback) {
      $http.get('http://localhost:5000/api/books')
@@ -80,7 +83,7 @@ app.controller('bookController', function($scope, $http,$location, $routeParams)
    //update a book
   this.putID = function(id, data, callback, failure) {
    $http.put('http://localhost:5000/api/books/' + id, data)
-        .then(callback, failure)
+        .then(callback, failure);
    };
    //add a new book
    this.addBook = function(book, callbackSuccess, callbackFailure) {
@@ -91,7 +94,7 @@ app.controller('bookController', function($scope, $http,$location, $routeParams)
    this.getBookLoans = function(id, callback) {
      $http.get('http://localhost:5000/api/loans/' + id)
           .then(callback);
-        };
+   };
 
    //delete book from the database
   //  this.deleteID = function(id, callbackSuccess, callbackFailure) {

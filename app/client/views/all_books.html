@@ -1,7 +1,15 @@
+<nav>
+  <ul>
+    <li><a ng-href="http://localhost:5000/#/">Home</a></li>
+    <li><a href="/#/books">Books</a></li>
+    <li><a href="/#/patrons">Patrons</a></li>
+    <li><a href="/#/loans">Loans</a></li>
+  </ul>
+</nav>
+
 <h1>Books</h1>
-  <ng-controller="bookController">
-    <p> <a ng-href="#/new_book" class="button" class="button">Create New Book</a></p>
-    <p>Filters <a ng-href="#/books">All</a> | <a ng-href="#/books/overdue">Overdue</a> | <a href="#/books/checked_out">Checked Out</a></p>
+    <p> <a ng-href="#/books/new" class="button" class="button">Create New Book</a></p>
+    <p>Filters <a href="#/books">All</a> | <a href="#/overdue_books">Overdue</a> | <a href="#/checked_out_books">Checked Out</a></p>
     <table>
         <thead>
             <tr>
@@ -12,12 +20,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat book in books>
-                <td><a ng-href="#/books/{{book.id}}">{{book.title}}</a></td>
+            <tr ng-repeat = "book in getAllbooks">
+                <td><a href='#/books/{{book.id}}'>{{book.title}}</a></td>
                 <td>{{book.author}}</td>
                 <td>{{book.genre}}</td>
                 <td>{{book.first_published}}</td>
             </tr>
         </tbody>
     </table>
-  </ng-controller>

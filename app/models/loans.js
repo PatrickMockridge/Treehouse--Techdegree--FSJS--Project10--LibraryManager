@@ -6,7 +6,6 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     book_id: DataTypes.INTEGER,
-    book_title: DataTypes.STRING,
     patron_id: DataTypes.INTEGER,
     loaned_on: DataTypes.DATE,
     return_by: DataTypes.DATE,

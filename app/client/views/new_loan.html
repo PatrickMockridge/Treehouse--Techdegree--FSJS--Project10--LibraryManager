@@ -1,3 +1,12 @@
+<nav>
+  <ul>
+    <li><a href="http://localhost:5000/#/">Home</a></li>
+    <li><a href="/#/books">Books</a></li>
+    <li><a href="/#/patrons">Patrons</a></li>
+    <li><a href="/#/loans">Loans</a></li>
+  </ul>
+</nav>
+
     <h1>New Loan</h1>
     <form>
         <p> <label for="book_id">Book</label><select ng-model="loan.book_id"  id="book_id"><option ng-repeat="book in getBooks" value="{{book._id}}">{{book.title}}</option>

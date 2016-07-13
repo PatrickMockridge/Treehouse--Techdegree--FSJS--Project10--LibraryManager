@@ -8,47 +8,47 @@
      function config($routeProvider) {
        $routeProvider
          .when('/', {
-           controller: 'bookController',
+           controller: '',
            controllerAs: 'vm',
            templateUrl: '/views/home.html'
          })
           .when('/books', {
-            controller: '',
+            controller: 'bookController',
             controllerAs: 'vm',
-            templateUrl: '/views/books.html'
+            templateUrl: '/views/all_books.html'
           })
           .when('/loans', {
             controller: '',
             controllerAs: 'vm',
-            templateUrl: '/views/loans.html'
+            templateUrl: '/views/all_loans.html'
           })
           .when('/patrons', {
             controller: '',
             controllerAs: 'vm',
-            templateUrl: '/views/patrons.html'
+            templateUrl: '/views/all_patrons.html'
          })
          .when('/books/:id', {
-           controller: '',
+           controller: 'bookController',
            controllerAs: 'vm',
-           templateUrl: '/views/books.html'
+           templateUrl: '/views/book_detail.html'
          })
-         .when('/books/overdue', {
-           controller: '',
+         .when('/overdue_books', {
+           controller: 'bookController',
            controllerAs: 'vm',
-           templateUrl: '/views/books.html'
+           templateUrl: '/views/overdue_books.html'
          })
-         .when('/books/checked_out', {
-           controller: '',
+         .when('/checked_out_books', {
+           controller: 'bookController',
            controllerAs: 'vm',
-           templateUrl: '/views/books.html'
+           templateUrl: '/views/checked_books.html'
          })
          .when('/patrons/:id', {
            controller: '',
            controllerAs: 'vm',
            templateUrl: '/views/patron_detail.html'
         })
-         .when('/books/new', {
-           controller: '',
+         .when('/new_book', {
+           controller: 'bookController',
            controllerAs: 'vm',
            templateUrl: '/views/new_book.html'
          })
@@ -62,8 +62,8 @@
            controllerAs: 'vm',
            templateUrl: '/views/new_patron.html'
          })
-         .when('/return_book/:id', {
-           controller: '',
+         .when('/books/return/:id', {
+           controller: 'bookController',
            controllerAs: 'vm',
            templateUrl: '/views/return_book.html'
          })

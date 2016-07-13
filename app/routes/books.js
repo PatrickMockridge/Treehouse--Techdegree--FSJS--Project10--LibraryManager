@@ -8,7 +8,7 @@ var patrons = require('../models').patrons;
 /* GET all books. */
 
 router.get('/', function(req, res, next) {
-  books.findAll({order: [["title", "DESC"]]})
+  books.findAll({order: [["id", "DESC"]]})
   .then(function(books){
     res.json(books);
     })
@@ -19,10 +19,7 @@ router.get('/', function(req, res, next) {
 
 /* GET book details by ID */
 router.get('/:id', function(req, res, next) {
-  books.findAll({
-    include: [{ model: loans, include: [{ model: patrons }] }],
-    where: { id: req.params.id }
-  })
+  books.findAll({ include: [{ model: loans, include: [{ model: patrons }] }], where: { id: req.params.id }})
   .then(function(bookDetail){
     res.json(bookDetail);
     })
@@ -34,7 +31,7 @@ router.get('/:id', function(req, res, next) {
 /* GET overdue books */
 router.get('/overdue', function(req, res, next) {
   loans.findAll({
-    //include: [{ model: books }],
+    include: [{ model: books }],
     where: { return_by: { $lt: new Date() }, returned_on: null }
   })
   .then(function(overdueBooks){
@@ -47,7 +44,10 @@ router.get('/overdue', function(req, res, next) {
 
 /* GET checked out books */
 router.get('/checked_out', function(req, res, next) {
-  loans.findAll({ include: [{ model: books }], where: { returned_on: null }})
+  loans.findAll({
+    include: [{ model: books }],
+    where: { returned_on: null }
+  })
   .then(function (checkedOutBooks) {
     res.json(checkedOutBooks);
     })
