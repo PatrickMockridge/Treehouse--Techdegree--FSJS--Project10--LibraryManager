@@ -7,7 +7,9 @@ var patrons = require('../models').patrons;
 
 /* GET all loans. */
 router.get('/', function(req, res, next) {
-  loans.findAll({order: [["loaned_on", "DESC"]]}).then(function(loans){
+  loans.findAll({
+    include: [{ model: books }, { model: patrons }],
+  }).then(function(loans){
     res.json(loans);
     })
     .catch(function(error){
@@ -16,7 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET checked out loans. */
-router.get('/checked_out', function(req, res, next) {
+router.get('/get/checked_out', function(req, res, next) {
   loans.findAll({
     where: { returned_on: null },
     order: [["loaned_on", "DESC"]]
@@ -29,9 +31,9 @@ router.get('/checked_out', function(req, res, next) {
    });
 });
 
-/* GET loans based upon book_id */
-router.get('/:book_id', function(req, res, next) {
-  loans.findAll({where: {book_id: req.params.book_id}}).then(function(loans){
+/* GET loan based on loan id */
+router.get('/:id', function(req, res, next) {
+  loans.findAll({where: {book_id: req.params.id}}).then(function(loans){
     res.json(loans);
     })
     .catch(function(error){
@@ -40,7 +42,7 @@ router.get('/:book_id', function(req, res, next) {
 });
 
 /* GET overdue loans. */
-router.get('/overdue', function(req, res, next) {
+router.get('/get/overdue', function(req, res, next) {
   loans.findAll({where: { return_by: { $lt: new Date() }, returned_on: null }}).then(function(loans){
     res.json(loans);
     })
@@ -56,6 +58,7 @@ router.post('/', function(req, res, next) {
     res.json(loan);
     })
     .catch(function(error){
+      console.log(error);
       res.send(500, error);
    });
 });

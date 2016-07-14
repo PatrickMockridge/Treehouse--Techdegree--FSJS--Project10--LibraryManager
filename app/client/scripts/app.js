@@ -19,9 +19,10 @@ angular.module("app", ['ngRoute'])
  //new book object
   $scope.newBook = new Object();
 
+
   $scope.addBook = function() {
       // add the recipe and then go to the detail screen
-      dataServiceBooks.addBook(newBook, function(response) {
+      dataServiceBooks.addBook($scope.newBook, function(response) {
       $location.url('#/books/' + response.id);
     }, function(reason) {
       console.log(reason);
@@ -66,14 +67,6 @@ angular.module("app", ['ngRoute'])
   });
   };
 
-  // var updateObject = {
-  //   first_name: $scope.patronDetails.first_name,
-  //   last_name: $scope.patronDetails.last_name,
-  //   address: $scope.patronDetails.address,
-  //   library_id: $scope.patronDetails.library_id,
-  //   zip_code: $scope.patronDetails.zip_code
-  // }
-
   $scope.updatePatron = function() {
     dataServicePatrons.putID($scope.ID, updateObject, function(response) {
         console.log(response.data);
@@ -87,6 +80,64 @@ angular.module("app", ['ngRoute'])
     dataServicePatrons.getID($scope.ID, function(response) {
     console.log(response.data[0]);
     $scope.patronDetails = response.data[0];
+    });
+  };
+
+  $scope.getID();
+})
+.controller('loanController', function(dataServiceLoans, dataServicePatrons, dataServiceBooks, $scope, $http, $location, $routeParams){
+  $scope.ID = $routeParams.id;
+  //get all books
+  dataServiceBooks.getAll(function(response) {
+    $scope.getAllBooks = response.data;
+    console.log($scope.getAllBooks);
+  });
+  //get all patrons
+  dataServicePatrons.getAll(function(response) {
+    $scope.getAllPatrons = response.data;
+    console.log($scope.getAllPatrons);
+  });
+  //get all loans
+  dataServiceLoans.getAll(function(response) {
+    $scope.getAllLoans = response.data;
+    console.log($scope.getAllLoans);
+  });
+  //get checked-out books
+   dataServiceLoans.getCheckedOutLoans(function(response) {
+     console.log(response.data);
+     $scope.checkedOutLoans = response.data;
+   });
+   //get overdue books
+   dataServiceLoans.getOverDueLoans(function(response) {
+     console.log(response.data[0].book);
+     $scope.overdueLoans = response.data;
+   });
+ //new book object
+  $scope.newLoan = new Object();
+  $scope.newLoan.returned_on = null;
+
+  $scope.createLoan = function() {
+      // add the recipe and then go to the detail screen
+      dataServiceLoans.createLoan($scope.newLoan, function(response) {
+      $location.url('#/loans/' + response.id);
+    }, function(reason) {
+      console.log(reason);
+  });
+  };
+
+  $scope.updateLoan = function() {
+    dataServiceLoans.putID($scope.ID, $scope.loan, function(response) {
+        console.log(response.data);
+        $scope.loan = response.data;
+          }, function(reason) {
+            console.log(reason);
+          });
+        };
+
+  $scope.getID = function() {
+    dataServiceLoans.getID($scope.ID, function(response) {
+    console.log(response.data[0]);
+    $scope.LoanDetails = response.data[0];
     });
   };
 
@@ -135,6 +186,7 @@ angular.module("app", ['ngRoute'])
   //         .then(callbackSuccess, callbackFailure)
   //  };
 })
+
 .service('dataServicePatrons', function($http) {
   //get all patrons
  this.getAll = function(callback) {
@@ -157,5 +209,42 @@ this.putID = function(id, data, callback, failure) {
         .then(callbackSuccess, callbackFailure);
  };
 
+})
+.service('dataServiceLoans', function($http) {
+    //get all books
+   this.getAll = function(callback) {
+     $http.get('http://localhost:5000/api/loans')
+          .then(callback);
+   };
+   //get checked out books
+  this.getCheckedOutLoans = function(callback) {
+    $http.get('http://localhost:5000/api/loans/get/checked_out')
+         .then(callback);
+   };
+   //get overdue books
+  this.getOverDueLoans = function(callback) {
+    $http.get('http://localhost:5000/api/loans/get/overdue')
+         .then(callback);
+   };
+   //get specific book
+  this.getID = function(id, callback) {
+    $http.get('http://localhost:5000/api/loans/' + id)
+         .then(callback);
+   };
+   //update a book
+  this.putID = function(id, data, callback, failure) {
+   $http.put('http://localhost:5000/api/loans/' + id, data)
+        .then(callback, failure);
+   };
+   //add a new book
+   this.createLoan = function(loan, callbackSuccess, callbackFailure) {
+     $http.post('http://localhost:5000/api/loans', loan)
+          .then(callbackSuccess, callbackFailure);
+   };
 
+   //delete book from the database
+  //  this.deleteID = function(id, callbackSuccess, callbackFailure) {
+  //    $http.delete('http://localhost:5000/api/recipes/' + id)
+  //         .then(callbackSuccess, callbackFailure)
+  //  };
 });

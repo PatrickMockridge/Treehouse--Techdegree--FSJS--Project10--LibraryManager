@@ -8,8 +8,8 @@
 </nav>
 
     <h1>Loans</h1>
-    <p> <a ng-href="#/loans/new" class="button">Create New Loan</a></p>
-    <p>Filters <a ng-href="#/loans">All</a> | <a ng-href="#/overdue_books">Overdue</a> | <a ng-href="#/checked_out_books">Checked Out</a></p>
+    <p> <a ng-href="#/new_loan" class="button">Create New Loan</a></p>
+    <p>Filters <a href="#/loans">All</a> | <a href="#/overdue_books">Overdue</a> | <a href="#/checked_out_books">Checked Out</a></p>
     <table>
         <thead>
             <tr>
@@ -22,15 +22,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr loan in getLoans>
+            <tr ng-repeat="loan in getAllLoans">
                 <!-- get book title based on book id -->
-                <td><a ng-href="#/books/{{loan.book_id}}">{{loan.book_title}}</a></td>
+                <td><a href="#/books/{{loan.book.id}}">{{loan.book.title}}</a></td>
                 <!--  get patron name based on patron id -->
-                <td><a ng-href="#/patrons/{{loan.patron_id}}">{{}}</a></td>
+                <td><a ng-href="#/patrons/{{loan.patron.id}}">{{loan.patron.first_name}} {{loan.patron.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
-                <td></td>
-                <td><a ng-href="#/return_book/{{loan.book_id}}" class="button">Return Book</a></td>
+                <td>{{loan.returned_on}}</td>
+                <td ng-if="!loan.returned_on"><a href="#/return_book/{{loan.book_id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>

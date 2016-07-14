@@ -18,7 +18,7 @@
             templateUrl: '/views/all_books.html'
           })
           .when('/loans', {
-            controller: '',
+            controller: 'loanController',
             controllerAs: 'vm',
             templateUrl: '/views/all_loans.html'
           })
@@ -58,7 +58,7 @@
            templateUrl: '/views/new_book.html'
          })
          .when('/new_loan', {
-           controller: '',
+           controller: 'loanController',
            controllerAs: 'vm',
            templateUrl: '/views/new_loan.html'
          })
