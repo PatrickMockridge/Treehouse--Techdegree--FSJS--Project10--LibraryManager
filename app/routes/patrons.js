@@ -15,6 +15,19 @@ router.get('/', function(req, res, next) {
    });
 });
 
+/* GET patron detail by ID. */
+router.get('/:id', function(req, res, next) {
+  patrons.findAll({ include: [{ model: loans, include: [{ model: books }] }], where: { id: req.params.id }})
+  .then(function(patronDetail){
+    res.json(patronDetail);
+    })
+    .catch(function(error){
+      res.send(500, error);
+   });
+});
+
+
+
 /* POST new patron */
 router.post('/', function(req, res, next) {
   patrons.create(req.body)

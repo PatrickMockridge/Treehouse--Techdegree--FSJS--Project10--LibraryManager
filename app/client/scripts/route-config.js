@@ -23,7 +23,7 @@
             templateUrl: '/views/all_loans.html'
           })
           .when('/patrons', {
-            controller: '',
+            controller: 'patronController',
             controllerAs: 'vm',
             templateUrl: '/views/all_patrons.html'
          })
@@ -48,7 +48,7 @@
            templateUrl: '/views/overdue_loans.html'
          })
          .when('/patrons/:id', {
-           controller: '',
+           controller: 'patronController',
            controllerAs: 'vm',
            templateUrl: '/views/patron_detail.html'
         })
@@ -63,7 +63,7 @@
            templateUrl: '/views/new_loan.html'
          })
          .when('/new_patron', {
-           controller: '',
+           controller: 'patronController',
            controllerAs: 'vm',
            templateUrl: '/views/new_patron.html'
          })

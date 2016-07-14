@@ -13,7 +13,7 @@
         <p><label for="author">Author</label><input ng-model="bookDetails.author" id="author" type="text"></p>
         <p><label for="genre">Genre</label><input ng-model="bookDetails.genre" id="genre" type="text" value="Non Fiction"></p>
         <p><label for="first_published">First Published</label><input ng-model="bookDetails.first_published" id="first_published" type="text"></p>
-        <p><input type="submit" value="Update" ng-submit=updateBook()></p>
+        <p><input type="submit" value="Update" ng-click=updateBook()></p>
     </form>
     <h2>Loan History</h2>
     <table>

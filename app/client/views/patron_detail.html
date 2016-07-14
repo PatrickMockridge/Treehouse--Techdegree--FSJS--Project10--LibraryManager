@@ -7,15 +7,15 @@
   </ul>
 </nav>
 
-    <h1>Patron: {{patron.first_name}} {{patron.last_name}}</h1>
+    <h1>Patron: {{patronDetails.first_name}} {{patronDetails.last_name}}</h1>
     <form>
-        <p> <label for="first_name">First Name</label><input id="first_name" type="text" ng-model="patron.first_name"></p>
-        <p> <label for="last_name">Last Name</label><input id="last_name" type="text" ng-model="patron.last_name"></p>
-        <p><label for="address"> Address</label><input id="address" type="text" ng-model="patron.address"></p>
-        <p><label for="email">Email</label><input id="email" type="text" ng-model="patron.email"></p>
-        <p> <label for="library_id">Library ID</label><input id="library_id" type="text" ng-model="patron.library_id"></p>
-        <p><label for="zip_code">Zip Code</label><input id="zip_code" type="text" value="90210" ng-model="patron.zip_code"></p>
-        <p><input type="submit" value="Update" ng-submit="updatePatron()"></p>
+        <p> <label for="first_name">First Name</label><input id="first_name" type="text" ng-model="patronDetails.first_name"></p>
+        <p> <label for="last_name">Last Name</label><input id="last_name" type="text" ng-model="patronDetails.last_name"></p>
+        <p><label for="address"> Address</label><input id="address" type="text" ng-model="patronDetails.address"></p>
+        <p><label for="email">Email</label><input id="email" type="text" ng-model="patronDetails.email"></p>
+        <p> <label for="library_id">Library ID</label><input id="library_id" type="text" ng-model="patronDetails.library_id"></p>
+        <p><label for="zip_code">Zip Code</label><input id="zip_code" type="text" value="90210" ng-model="patronDetails.zip_code"></p>
+        <p><input type="submit" value="Update" ng-click="updatePatron()"></p>
     </form>
     <h2>Loan History</h2>
     <table>
@@ -30,13 +30,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="loan in getLoans">
-                <td><a ng-href="#/books/{{loan.book_id}}">????</a></td>
-                <td><a ng-href="#/patrons/{{loan.patron_id}}">????</a></td>
+            <tr ng-repeat="loan in patronDetails.loans">
+                <td><a ng-href="#/books/{{loan.book_id}}">{{loan.book.title}}</a></td>
+                <td><a ng-href="#/patrons/{{patronDetails.id}}">{{patronDetails.first_name}} {{patronDetails.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td>{{loan.returned_on}}</td>
-                <td><a href="#/return_book/{{loan.book_id}}" class="button">Return Book</a></td>
+                <td><a ng-if="!loan.returned_on" href="#/return/{{loan.book_id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>

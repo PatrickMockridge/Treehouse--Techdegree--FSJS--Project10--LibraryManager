@@ -9,7 +9,7 @@
 
 <h1>Overdue Books</h1>
 <p> <a ng-href="#/new_book" class="button" class="button">Create New Book</a></p>
-<p>Filters <a ng-href="#/books">All</a> | <a ng-href="#/books/overdue">Overdue</a> | <a href="#/books/checked_out">Checked Out</a></p>
+<p>Filters <a ng-href="#/books">All</a> | <a ng-href="#/overdue_books">Overdue</a> | <a href="#/checked_out_books">Checked Out</a></p>
 <table>
     <thead>
         <tr>
@@ -20,11 +20,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat book in getBooks>
-            <td><a ng-href="#/books/{{book._id}}">{{book.title}}</a></td>
-            <td>{{book.author}}</td>
-            <td>{{book.genre}}</td>
-            <td>{{book.first_published}}</td>
+        <tr ng-repeat = "loan in overdueBooks">
+          <td><a href="#/books/{{loan.book.id}}">{{loan.book.title}}</a></td>
+          <td>{{loan.book.author}}</td>
+          <td>{{loan.book.genre}}</td>
+          <td>{{loan.book.first_published}}</td>
         </tr>
     </tbody>
 </table>
