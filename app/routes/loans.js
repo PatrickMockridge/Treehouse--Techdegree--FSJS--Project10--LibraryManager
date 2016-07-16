@@ -9,6 +9,7 @@ var patrons = require('../models').patrons;
 router.get('/', function(req, res, next) {
   loans.findAll({
     include: [{ model: books }, { model: patrons }],
+    order: [["loaned_on", "DESC"]]
   }).then(function(loans){
     res.json(loans);
     })
@@ -54,7 +55,7 @@ router.get('/get/overdue', function(req, res, next) {
 /* POST new loan */
 router.post('/', function(req, res, next) {
   loans.create(req.body)
-  .then(function (book) {
+  .then(function (loan) {
     res.json(loan);
     })
     .catch(function(error){

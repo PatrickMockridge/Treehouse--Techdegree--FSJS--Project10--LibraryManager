@@ -119,7 +119,7 @@ angular.module("app", ['ngRoute'])
   $scope.createLoan = function() {
       // add the recipe and then go to the detail screen
       dataServiceLoans.createLoan($scope.newLoan, function(response) {
-      $location.url('#/loans/' + response.id);
+      $location.url('#/loans');
     }, function(reason) {
       console.log(reason);
   });

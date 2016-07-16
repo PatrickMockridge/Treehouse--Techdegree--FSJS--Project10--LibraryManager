@@ -8,7 +8,6 @@
 </nav>
 
     <h1>New Loan</h1>
-    <form>
         <p>
           <label for="book_id">Book: </label>
           <select ng-model="newLoan.book_id" id="book_id">
@@ -30,6 +29,5 @@
           <label for="return_by">Return by: </label><input id="return_by" type="text" ng-model="newLoan.return_by">
         </p>
         <p>
-          <input type="submit" value="Create New Loan" ng-click="createLoan()">
+          <a href="" ng-click="createLoan()" class="button">Create Loan</a>
         </p>
-    </form>

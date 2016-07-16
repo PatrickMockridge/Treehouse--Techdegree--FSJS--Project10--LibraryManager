@@ -14,30 +14,28 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     loaned_on: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       validate: {
-      notEmpty: {
-          msg: "Returned on date is required"
-        },
         isDate: {
-          msg: "Please enter the date that the book was loaned on"
+          msg: "Loaned on date is required"
         }
       }
     },
     return_by: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       validate: {
-      notEmpty: {
-          msg: "Returned on date is required"
-        },
         isDate: {
-          msg: "Please enter the date that the book will be returned by"
+          msg: "Return by date is required"
         }
       }
     },
     returned_on: {
-      type: DataTypes.DATE
-    }
+      type: DataTypes.DATEONLY,
+      validate: {
+        isDate: {
+          msg: "You must use a valid date. ex: 2016-07-15"
+        }
+      }
   }, {
     classMethods: {
       associate: function(models) {

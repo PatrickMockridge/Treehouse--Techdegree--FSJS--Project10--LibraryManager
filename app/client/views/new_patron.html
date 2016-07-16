@@ -8,12 +8,10 @@
 </nav>
 
     <h1>New Patron</h1>
-    <form>
         <p> <label for="first_name">First Name</label><input ng-model="newPatron.first_name" id="first_name" type="text"></p>
         <p> <label for="last_name">Last Name</label><input ng-model="newPatron.last_name" id="last_name" type="text"></p>
         <p><label for="address"> Address</label><input ng-model="newPatron.address" id="address" type="text"></p>
         <p><label for="email">Email</label><input ng-model="newPatron.email" id="email" type="text"></p>
         <p> <label for="library_id">Library ID</label><input ng-model="newPatron.library_id" id="library_id" type="text"></p>
         <p><label for="zip_code">Zip Code</label><input ng-model="newPatron.zip_code" id="zip_code" type="text"></p>
-        <p><input type="submit" value="Create New Patron" ng-click="addPatron()"></p>
-    </form>
+        <p><a href="" ng-click="createLoan()" class="button">Create Loan</a></p>

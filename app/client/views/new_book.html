@@ -8,10 +8,8 @@
 </nav>
 
   <h1>New Book</h1>
-    <form>
         <p> <label for="title">Title</label><input ng-model="newBook.title" id="title" type="text"></p>
         <p><label for="author">Author</label><input ng-model="newBook.author" id="author" type="text"></p>
         <p><label for="genre">Genre</label><input ng-model="newBook.genre" id="genre" type="text"></p>
         <p><label for="first_published">First Published</label><input ng-model="newBook.first_published" id="first_published" type="text"></p>
-        <p><input type="submit" value="Create New Book" ng-click="addBook()"></p>
-    </form>
+        <p><a href="" class="button" ng-click="addBook()">Create New Book</a></p>
