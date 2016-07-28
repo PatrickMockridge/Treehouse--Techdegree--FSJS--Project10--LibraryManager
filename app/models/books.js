@@ -29,8 +29,16 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     },
-    first_published: DataTypes.INTEGER
-  }, {
+    first_published: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    validate: {
+      isNumeric: {
+        msg: "Year should be in integer format"
+      }
+    }
+  }
+}, {
     classMethods: {
       associate: function(models) {
          //associations can be defined here

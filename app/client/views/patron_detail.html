@@ -15,7 +15,12 @@
         <p><label for="email">Email</label><input id="email" type="text" ng-model="patronDetails.email"></p>
         <p> <label for="library_id">Library ID</label><input id="library_id" type="text" ng-model="patronDetails.library_id"></p>
         <p><label for="zip_code">Zip Code</label><input id="zip_code" type="text" value="90210" ng-model="patronDetails.zip_code"></p>
-        <p><input type="submit" value="Update" ng-click="updatePatron()"></p>
+        <p><a href="" ng-click="updatePatron()" class="button">Update Patron</a></p>
+        <p ng-if="success">{{success}}</p>
+        <div ng-if="failure">
+          <p>Creation Failed</p>
+          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+        </div>
     </form>
     <h2>Loan History</h2>
     <table>
@@ -36,7 +41,7 @@
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td>{{loan.returned_on}}</td>
-                <td><a ng-if="!loan.returned_on" href="#/return/{{loan.book_id}}" class="button">Return Book</a></td>
+                <td><a ng-if="!loan.returned_on" href="#/return/{{loan.id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>

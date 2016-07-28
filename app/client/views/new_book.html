@@ -1,15 +1,20 @@
 <nav>
   <ul>
     <li><a href="http://localhost:5000/#/">Home</a></li>
-    <li><a href="/#/books">Books</a></li>
-    <li><a href="/#/patrons">Patrons</a></li>
-    <li><a href="/#/loans">Loans</a></li>
+    <li><a href="#/books">Books</a></li>
+    <li><a href="#/patrons">Patrons</a></li>
+    <li><a href="#/loans">Loans</a></li>
   </ul>
 </nav>
 
   <h1>New Book</h1>
-        <p> <label for="title">Title</label><input ng-model="newBook.title" id="title" type="text"></p>
+        <p><label for="title">Title</label><input ng-model="newBook.title" id="title" type="text"></p>
         <p><label for="author">Author</label><input ng-model="newBook.author" id="author" type="text"></p>
         <p><label for="genre">Genre</label><input ng-model="newBook.genre" id="genre" type="text"></p>
         <p><label for="first_published">First Published</label><input ng-model="newBook.first_published" id="first_published" type="text"></p>
         <p><a href="" class="button" ng-click="addBook()">Create New Book</a></p>
+        <p ng-if="success">{{success}}</p>
+        <div ng-if="failure">
+          <p>Creation Failed</p>
+          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+        </div>

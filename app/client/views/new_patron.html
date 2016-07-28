@@ -14,4 +14,9 @@
         <p><label for="email">Email</label><input ng-model="newPatron.email" id="email" type="text"></p>
         <p> <label for="library_id">Library ID</label><input ng-model="newPatron.library_id" id="library_id" type="text"></p>
         <p><label for="zip_code">Zip Code</label><input ng-model="newPatron.zip_code" id="zip_code" type="text"></p>
-        <p><a href="" ng-click="createLoan()" class="button">Create Loan</a></p>
+        <p><a href="" ng-click="addPatron()" class="button">Create New Patron</a></p>
+        <p ng-if="success">{{success}}</p>
+        <div ng-if="failure">
+          <p>Creation Failed</p>
+          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+        </div>

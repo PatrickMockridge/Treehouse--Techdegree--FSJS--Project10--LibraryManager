@@ -22,12 +22,11 @@
             </option>
           </select>
         </p>
-        <p>
-          <label for="loaned_on">Loaned on: </label><input id="loaned_on" type="text" ng-model="newLoan.loaned_on">
-        </p>
-        <p>
-          <label for="return_by">Return by: </label><input id="return_by" type="text" ng-model="newLoan.return_by">
-        </p>
-        <p>
-          <a href="" ng-click="createLoan()" class="button">Create Loan</a>
-        </p>
+        <p><label for="loaned_on">Loaned on: </label><input id="loaned_on" type="text" ng-model="newLoan.loaned_on"></p>
+        <p><label for="return_by">Return by: </label><input id="return_by" type="text" ng-init="newLoan.return_by=todaysDate" ng-model="newLoan.return_by"></p>
+        <p><a href="" ng-click="createLoan()" class="button">Create Loan</a></p>
+        <p ng-if="success">{{success}}</p>
+        <div ng-if="failure">
+          <p>Creation Failed</p>
+          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+        </div>

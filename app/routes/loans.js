@@ -34,7 +34,10 @@ router.get('/get/checked_out', function(req, res, next) {
 
 /* GET loan based on loan id */
 router.get('/:id', function(req, res, next) {
-  loans.findAll({where: {book_id: req.params.id}}).then(function(loans){
+  loans.findAll({where: {id: req.params.id},
+    include: [{ model: books }, { model: patrons }]
+    })
+    .then(function(loans){
     res.json(loans);
     })
     .catch(function(error){

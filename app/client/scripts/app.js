@@ -1,7 +1,8 @@
-angular.module("app", ['ngRoute'])
+angular.module("app", ['ngRoute', 'angularMoment'])
 .controller('bookController', function(dataServiceBooks, $scope, $http, $location, $routeParams){
   $scope.ID = $routeParams.id;
   //get all books
+  //$scope.firstPublishedFailure = (!Number.isInteger($scope.book.first_published) && $scope.book.first_published != null)
   dataServiceBooks.getAll(function(response) {
     $scope.getAllbooks = response.data;
     console.log($scope.getAllbooks);
@@ -23,18 +24,27 @@ angular.module("app", ['ngRoute'])
   $scope.addBook = function() {
       // add the recipe and then go to the detail screen
       dataServiceBooks.addBook($scope.newBook, function(response) {
-      $location.url('#/books/' + response.id);
-    }, function(reason) {
-      console.log(reason);
+      $scope.success = "Book Successfully Added!";
+      $scope.failure = false;
+      console.log(response);
+    }, function(error) {
+      $scope.success = false;
+      $scope.failure = true;
+      $scope.errorMessages = error.data.errors
+      console.log(error);
   });
   };
 
   $scope.updateBook = function() {
     dataServiceBooks.putID($scope.ID, $scope.book, function(response) {
-        console.log(response.data);
-        $scope.book = response.data;
-          }, function(reason) {
-            console.log(reason);
+        console.log(response);
+        $scope.success = "Book Successfully Updated!";
+        $scope.failure = false;
+      }, function(error) {
+        $scope.success = false;
+        $scope.failure = true;
+        $scope.errorMessages = error.data.errors
+        console.log(error);
           });
         };
 
@@ -60,19 +70,28 @@ angular.module("app", ['ngRoute'])
   $scope.addPatron = function() {
       // add the recipe and then go to the detail screen
       dataServicePatrons.addPatron($scope.newPatron, function(response) {
+      $scope.success = "Patron Successfully Added!";
+      $scope.failure = false;
       console.log(response);
-      $location.url('http://localhost5000/#/patrons');
-    }, function(reason) {
-      console.log(reason);
+    }, function(error) {
+      $scope.success = false;
+      $scope.failure = true;
+      $scope.errorMessages = error.data.errors
+      console.log(error);
   });
   };
 
   $scope.updatePatron = function() {
     dataServicePatrons.putID($scope.ID, updateObject, function(response) {
+        $scope.success = "Book Successfully Updated!";
+        $scope.failure = false;
         console.log(response.data);
         $scope.book = response.data;
           }, function(reason) {
-            console.log(reason);
+            $scope.success = false;
+            $scope.failure = true;
+            $scope.errorMessages = error.data.errors
+            console.log(error);
           });
         };
 
@@ -85,8 +104,11 @@ angular.module("app", ['ngRoute'])
 
   $scope.getID();
 })
-.controller('loanController', function(dataServiceLoans, dataServicePatrons, dataServiceBooks, $scope, $http, $location, $routeParams){
+.controller('loanController', function(moment, dataServiceLoans, dataServicePatrons, dataServiceBooks, $scope, $http, $location, $routeParams){
   $scope.ID = $routeParams.id;
+  $scope.returnDate = new moment().add(7,'d').format('YYYY-MM-DD');
+  $scope.todaysDate = new moment().format('YYYY-MM-DD');
+  console.log($scope.returnDate);
   //get all books
   dataServiceBooks.getAll(function(response) {
     $scope.getAllBooks = response.data;
@@ -119,25 +141,34 @@ angular.module("app", ['ngRoute'])
   $scope.createLoan = function() {
       // add the recipe and then go to the detail screen
       dataServiceLoans.createLoan($scope.newLoan, function(response) {
-      $location.url('#/loans');
+      console.log(response);
+      $scope.success = "Loan Sucessfully Created!";
+      $scope.failure = false;
     }, function(reason) {
-      console.log(reason);
+      $scope.success = false;
+      $scope.failure = true;
+      $scope.errorMessages = error.data.errors
+      console.log(error);
   });
   };
 
   $scope.updateLoan = function() {
     dataServiceLoans.putID($scope.ID, $scope.loan, function(response) {
-        console.log(response.data);
-        $scope.loan = response.data;
+        console.log(response);
+        $scope.success = "Loan Sucessfully Updated!";
+        $scope.failure = false;
           }, function(reason) {
-            console.log(reason);
+            $scope.success = false;
+            $scope.failure = true;
+            $scope.errorMessages = error.data.errors
+            console.log(error);
           });
         };
 
   $scope.getID = function() {
     dataServiceLoans.getID($scope.ID, function(response) {
     console.log(response.data[0]);
-    $scope.LoanDetails = response.data[0];
+    $scope.loanDetails = response.data[0];
     });
   };
 
@@ -170,21 +201,11 @@ angular.module("app", ['ngRoute'])
         .then(callback, failure);
    };
    //add a new book
-   this.addBook = function(book, callbackSuccess, callbackFailure) {
+   this.addBook = function(book, callback, failure) {
      $http.post('http://localhost:5000/api/books', book)
-          .then(callbackSuccess, callbackFailure);
-   };
-   //get loans based on book ID
-   this.getBookLoans = function(id, callback) {
-     $http.get('http://localhost:5000/api/loans/' + id)
-          .then(callback);
+          .then(callback, failure);
    };
 
-   //delete book from the database
-  //  this.deleteID = function(id, callbackSuccess, callbackFailure) {
-  //    $http.delete('http://localhost:5000/api/recipes/' + id)
-  //         .then(callbackSuccess, callbackFailure)
-  //  };
 })
 
 .service('dataServicePatrons', function($http) {
@@ -204,9 +225,9 @@ this.putID = function(id, data, callback, failure) {
       .then(callback, failure);
  };
  //add a new book
- this.addPatron = function(patron, callbackSuccess, callbackFailure) {
+ this.addPatron = function(patron, success, failure) {
    $http.post('http://localhost:5000/api/patrons', patron)
-        .then(callbackSuccess, callbackFailure);
+        .then(success, failure);
  };
 
 })
@@ -237,14 +258,9 @@ this.putID = function(id, data, callback, failure) {
         .then(callback, failure);
    };
    //add a new book
-   this.createLoan = function(loan, callbackSuccess, callbackFailure) {
+   this.createLoan = function(loan, callback, failure) {
      $http.post('http://localhost:5000/api/loans', loan)
-          .then(callbackSuccess, callbackFailure);
+          .then(success, failure);
    };
 
-   //delete book from the database
-  //  this.deleteID = function(id, callbackSuccess, callbackFailure) {
-  //    $http.delete('http://localhost:5000/api/recipes/' + id)
-  //         .then(callbackSuccess, callbackFailure)
-  //  };
 });

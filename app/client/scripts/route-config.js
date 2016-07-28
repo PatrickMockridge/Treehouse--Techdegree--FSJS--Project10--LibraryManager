@@ -68,7 +68,7 @@
            templateUrl: '/views/new_patron.html'
          })
          .when('/return/:id', {
-           controller: 'bookController',
+           controller: 'loanController',
            controllerAs: 'vm',
            templateUrl: '/views/return_book.html'
          })

@@ -16,16 +16,22 @@ module.exports = function(sequelize, DataTypes) {
     loaned_on: {
       type: DataTypes.DATEONLY,
       validate: {
+        notEmpty: {
+          msg: "Loaned On Date is Required"
+        },
         isDate: {
-          msg: "Loaned on date is required"
+          msg: "Loaned on date is required of the format YYYY-MM-DD"
         }
       }
     },
     return_by: {
       type: DataTypes.DATEONLY,
       validate: {
-        isDate: {
+        notEmpty: {
           msg: "Return by date is required"
+        },
+        isDate: {
+          msg: "Return by date is required of the format YYYY-MM-DD"
         }
       }
     },
@@ -33,9 +39,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       validate: {
         isDate: {
-          msg: "You must use a valid date. ex: 2016-07-15"
+          msg: "You must use a valid date of the format YYYY-MM-DD"
         }
       }
+    }
   }, {
     classMethods: {
       associate: function(models) {

@@ -9,11 +9,17 @@
 
     <h1>{{bookDetails.title}}</h1>
     <form>
-        <p><label for="title">Title</label><input ng-model="bookDetails.title" id="title" type="text"></p>
+        <p><label for="title">Title</label><input ng-model="bookDetails.title" id="title" type="text"><ng-if</p>
         <p><label for="author">Author</label><input ng-model="bookDetails.author" id="author" type="text"></p>
         <p><label for="genre">Genre</label><input ng-model="bookDetails.genre" id="genre" type="text" value="Non Fiction"></p>
         <p><label for="first_published">First Published</label><input ng-model="bookDetails.first_published" id="first_published" type="text"></p>
-        <p><input type="submit" value="Update" ng-click=updateBook()></p>
+        <p><a href="" ng-click="updateBook()" class="button">Update Book</a></p>
+        <p ng-if="success">{{success}}</p>
+        <div ng-if="failure">
+          <p>Update Failed</p>
+          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+        </div>
+
     </form>
     <h2>Loan History</h2>
     <table>
@@ -34,7 +40,7 @@
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td>{{loan.returned_on}}</td>
-                <td><a ng-if "!loan.returned_on" ng-href="#/return_book" class="button">Return Book</a></td>
+                <td><a ng-if="!loan.returned_on" href="#/return/{{loan.id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>
