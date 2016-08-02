@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     first_name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "First name is required"
@@ -15,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     last_name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Last name is required"
@@ -23,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     address: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Address is required"
@@ -31,6 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Email is required"
@@ -42,6 +46,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     library_id: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Library ID is required"
@@ -50,6 +55,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     zip_code: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Zip code is required"
@@ -66,7 +72,7 @@ module.exports = function(sequelize, DataTypes) {
         patrons.hasMany(models.loans, {foreignKey: 'patron_id'});
       }
     },
-    timestamps: false  // I do NOT want timestamps here
+    timestamps: false  // No timestamps
   });
   return patrons;
 };

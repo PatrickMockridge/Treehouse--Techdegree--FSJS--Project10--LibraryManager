@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     loaned_on: {
       type: DataTypes.DATEONLY,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Loaned On Date is Required"
@@ -51,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
         loans.belongsTo(models.books, {foreignKey: 'book_id'});
       }
     },
-    timestamps: false  // I do NOT want timestamps here
+    timestamps: false  // no timestamps
   });
   return loans;
 };

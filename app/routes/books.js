@@ -6,7 +6,6 @@ var loans = require('../models').loans;
 var patrons = require('../models').patrons;
 
 /* GET all books. */
-
 router.get('/', function(req, res, next) {
   books.findAll({order: [["id", "DESC"]]})
   .then(function(books){
@@ -58,13 +57,16 @@ router.get('/get/checked_out', function(req, res, next) {
 
 /* POST new book */
 router.post('/', function(req, res, next) {
+  //var dateOK = (Number.isInteger(req.body.first_published) || req.body.first_published == null);
+  //if (req.body.title && req.body.author && req.body.author && dateOK) {
   books.create(req.body)
   .then(function (book) {
     res.json(book);
     })
     .catch(function(error){
-      res.send(500, error);
+      return res.send(500, error);
    });
+ //}
 });
 
 /* UPDATE book */
@@ -73,7 +75,7 @@ router.put('/:id', function(req, res, next) {
     if(book) {
       return book.update(req.body);
     } else {
-      res.send(404)
+      res.send(404, error)
     }
   })
   .then(function (book) {
