@@ -7,9 +7,9 @@
   </ul>
 </nav>
 
-    <h1>Checked Out Books</h1>
+    <h1>Checked Out Loans</h1>
     <p> <a ng-href="#/new_loan" class="button">Create New Loan</a></p>
-    <p>Filters <a ng-href="#/loans">All</a> | <a ng-href="#/books/overdue">Overdue</a> | <a ng-href="#/loans/checked_out">Checked Out</a></p>
+    <p>Filters <a ng-href="#/loans">All</a> | <a ng-href="#/overdue_loans">Overdue</a> | <a ng-href="#/checked_out_loans">Checked Out</a></p>
     <table>
         <thead>
             <tr>
@@ -22,13 +22,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="loan in getCheckedOutLoans">
+            <tr ng-repeat="loan in vm.getCheckedOutLoans">
                 <td><a ng-href="#/books/{{loan.book._id}}">{{loan.book.title}}</a></td>
                 <td><a ng-href="#/patrons{{loan.patron._id}}">{{loan.patron.first_name}} {{loan.patron.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td></td>
-                <td><a href="#/return/{{loan.id}}" class="button">Return Book</a></td>
+                <td><a href="/#/return/{{loan.id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>

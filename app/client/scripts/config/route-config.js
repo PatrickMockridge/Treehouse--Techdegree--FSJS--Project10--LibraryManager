@@ -1,9 +1,10 @@
 (function() {
+
   'use strict';
 
      angular
        .module('app')
-       .config(config);
+       .config(['$routeProvider', config]);
     //
      function config($routeProvider) {
        $routeProvider
@@ -61,6 +62,11 @@
            controller: 'loanController',
            controllerAs: 'vm',
            templateUrl: '/views/new_loan.html'
+         })
+         .when('/checked_out_loans', {
+           controller: 'loanController',
+           controllerAs: 'vm',
+           templateUrl: '/views/checked_loans.html'
          })
          .when('/new_patron', {
            controller: 'patronController',

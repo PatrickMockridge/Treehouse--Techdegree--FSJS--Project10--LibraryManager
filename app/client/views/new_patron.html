@@ -8,15 +8,15 @@
 </nav>
 
     <h1>New Patron</h1>
-        <p> <label for="first_name">First Name</label><input ng-model="newPatron.first_name" id="first_name" type="text"></p>
-        <p> <label for="last_name">Last Name</label><input ng-model="newPatron.last_name" id="last_name" type="text"></p>
-        <p><label for="address"> Address</label><input ng-model="newPatron.address" id="address" type="text"></p>
-        <p><label for="email">Email</label><input ng-model="newPatron.email" id="email" type="text"></p>
-        <p> <label for="library_id">Library ID</label><input ng-model="newPatron.library_id" id="library_id" type="text"></p>
-        <p><label for="zip_code">Zip Code</label><input ng-model="newPatron.zip_code" id="zip_code" type="text"></p>
-        <p><a href="" ng-click="addPatron()" class="button">Create New Patron</a></p>
-        <p ng-if="success">{{success}}</p>
-        <div ng-if="failure">
+        <p> <label for="first_name">First Name</label><input ng-model="vm.newPatron.first_name" id="first_name" type="text"></p>
+        <p> <label for="last_name">Last Name</label><input ng-model="vm.newPatron.last_name" id="last_name" type="text"></p>
+        <p><label for="address"> Address</label><input ng-model="vm.newPatron.address" id="address" type="text"></p>
+        <p><label for="email">Email</label><input ng-model="vm.newPatron.email" id="email" type="text"></p>
+        <p> <label for="library_id">Library ID</label><input ng-model="vm.newPatron.library_id" id="library_id" type="text"></p>
+        <p><label for="zip_code">Zip Code</label><input ng-model="vm.newPatron.zip_code" id="zip_code" type="text"></p>
+        <p><a href="" ng-click="vm.addPatron()" class="button">Create New Patron</a></p>
+        <p ng-if="vm.success">{{vm.success}}</p>
+        <div ng-if="vm.failure">
           <p>Creation Failed</p>
-          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+          <p ng-repeat="error in vm.errorMessages">{{error.message}}</p>
         </div>

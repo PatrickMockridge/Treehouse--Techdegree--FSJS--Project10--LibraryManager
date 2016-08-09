@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
 /* GET checked out loans. */
 router.get('/get/checked_out', function(req, res, next) {
   loans.findAll({
+    include: [{ model: books }, { model: patrons }],
     where: { returned_on: null },
     order: [["loaned_on", "DESC"]]
   })

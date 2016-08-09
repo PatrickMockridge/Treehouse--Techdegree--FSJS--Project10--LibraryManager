@@ -9,7 +9,7 @@
 
 <h1>Books</h1>
     <p> <a ng-href="#/new_book" class="button" class="button">Create New Book</a></p>
-    <p>Filters <a href="#/books">All</a> | <a href="#/overdue_books">Overdue</a> | <a href="#/checked_out_books">Checked Out</a></p>
+    <p>Filters <a href="/#/books">All</a> | <a href="/#/overdue_books">Overdue</a> | <a href="/#/checked_out_books">Checked Out</a></p>
     <table>
         <thead>
             <tr>
@@ -20,11 +20,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat = "book in getAllbooks">
-                <td><a href='#/books/{{book.id}}'>{{book.title}}</a></td>
+            <tr ng-repeat = "book in vm.getAllBooks | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
+                <td><a href='/#/books/{{book.id}}'>{{book.title}}</a></td>
                 <td>{{book.author}}</td>
                 <td>{{book.genre}}</td>
                 <td>{{book.first_published}}</td>
             </tr>
         </tbody>
     </table>
+<button ng-click="pagination.prevPage()">Previous</button>
+<button ng-click="pagination.nextPage()">Next</button>

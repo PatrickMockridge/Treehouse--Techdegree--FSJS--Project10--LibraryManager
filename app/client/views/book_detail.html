@@ -9,15 +9,15 @@
 
     <h1>{{bookDetails.title}}</h1>
     <form>
-        <p><label for="title">Title</label><input ng-model="bookDetails.title" id="title" type="text"><ng-if</p>
-        <p><label for="author">Author</label><input ng-model="bookDetails.author" id="author" type="text"></p>
-        <p><label for="genre">Genre</label><input ng-model="bookDetails.genre" id="genre" type="text" value="Non Fiction"></p>
-        <p><label for="first_published">First Published</label><input ng-model="bookDetails.first_published" id="first_published" type="text"></p>
-        <p><a href="" ng-click="updateBook()" class="button">Update Book</a></p>
-        <p ng-if="success">{{success}}</p>
-        <div ng-if="failure">
+        <p><label for="title">Title</label><input ng-model="vm.bookDetails.title" id="title" type="text"><ng-if</p>
+        <p><label for="author">Author</label><input ng-model="vm.bookDetails.author" id="author" type="text"></p>
+        <p><label for="genre">Genre</label><input ng-model="vm.bookDetails.genre" id="genre" type="text" value="Non Fiction"></p>
+        <p><label for="first_published">First Published</label><input ng-model="vm.bookDetails.first_published" id="first_published" type="text"></p>
+        <p><a href="" ng-click="vm.updateBook()" class="button">Update Book</a></p>
+        <p ng-if="vm.success">{{success}}</p>
+        <div ng-if="vm.failure">
           <p>Update Failed</p>
-          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+          <p ng-repeat="error in vm.errorMessages">{{error.message}}</p>
         </div>
 
     </form>
@@ -34,13 +34,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="loan in bookDetails.loans">
+            <tr ng-repeat="loan in vm.bookDetails.loans">
                 <td><a ng-href="#/books/{{loan.book_id}}">{{bookDetails.title}}</a></td>
                 <td><a href="#/patrons/{{loan.patron_id}}">{{loan.patron.first_name}} {{loan.patron.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td>{{loan.returned_on}}</td>
-                <td><a ng-if="!loan.returned_on" href="#/return/{{loan.id}}" class="button">Return Book</a></td>
+                <td><a ng-if="!loan.returned_on" href="/#/return/{{loan.id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>

@@ -7,19 +7,19 @@
   </ul>
 </nav>
 
-    <h1>Patron: {{patronDetails.first_name}} {{patronDetails.last_name}}</h1>
+    <h1>Patron: {{vm.patronDetails.first_name}} {{vm.patronDetails.last_name}}</h1>
     <form>
-        <p> <label for="first_name">First Name</label><input id="first_name" type="text" ng-model="patronDetails.first_name"></p>
-        <p> <label for="last_name">Last Name</label><input id="last_name" type="text" ng-model="patronDetails.last_name"></p>
-        <p><label for="address"> Address</label><input id="address" type="text" ng-model="patronDetails.address"></p>
-        <p><label for="email">Email</label><input id="email" type="text" ng-model="patronDetails.email"></p>
-        <p> <label for="library_id">Library ID</label><input id="library_id" type="text" ng-model="patronDetails.library_id"></p>
-        <p><label for="zip_code">Zip Code</label><input id="zip_code" type="text" value="90210" ng-model="patronDetails.zip_code"></p>
+        <p> <label for="first_name">First Name</label><input id="first_name" type="text" ng-model="vm.patronDetails.first_name"></p>
+        <p> <label for="last_name">Last Name</label><input id="last_name" type="text" ng-model="vm.patronDetails.last_name"></p>
+        <p><label for="address"> Address</label><input id="address" type="text" ng-model="vm.patronDetails.address"></p>
+        <p><label for="email">Email</label><input id="email" type="text" ng-model="vm.patronDetails.email"></p>
+        <p> <label for="library_id">Library ID</label><input id="library_id" type="text" ng-model="vm.patronDetails.library_id"></p>
+        <p><label for="zip_code">Zip Code</label><input id="zip_code" type="text" ng-model="vm.patronDetails.zip_code"></p>
         <p><a href="" ng-click="updatePatron()" class="button">Update Patron</a></p>
-        <p ng-if="success">{{success}}</p>
-        <div ng-if="failure">
+        <p ng-if="vm.success">{{vm.success}}</p>
+        <div ng-if="vm.failure">
           <p>Creation Failed</p>
-          <p ng-repeat="error in errorMessages">{{error.message}}</p>
+          <p ng-repeat="error in vm.errorMessages">{{error.message}}</p>
         </div>
     </form>
     <h2>Loan History</h2>
@@ -35,13 +35,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="loan in patronDetails.loans">
+            <tr ng-repeat="loan in vm.patronDetails.loans">
                 <td><a ng-href="#/books/{{loan.book_id}}">{{loan.book.title}}</a></td>
                 <td><a ng-href="#/patrons/{{patronDetails.id}}">{{patronDetails.first_name}} {{patronDetails.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>
                 <td>{{loan.returned_on}}</td>
-                <td><a ng-if="!loan.returned_on" href="#/return/{{loan.id}}" class="button">Return Book</a></td>
+                <td><a ng-if="!loan.returned_on" href="/#/return/{{loan.id}}" class="button">Return Book</a></td>
             </tr>
         </tbody>
     </table>
