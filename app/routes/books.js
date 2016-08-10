@@ -57,8 +57,6 @@ router.get('/get/checked_out', function(req, res, next) {
 
 /* POST new book */
 router.post('/', function(req, res, next) {
-  //var dateOK = (Number.isInteger(req.body.first_published) || req.body.first_published == null);
-  //if (req.body.title && req.body.author && req.body.author && dateOK) {
   books.create(req.body)
   .then(function (book) {
     res.json(book);

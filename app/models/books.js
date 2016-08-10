@@ -8,29 +8,14 @@ module.exports = function(sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Please Enter Title"
-        }
-      }
     },
     author: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Please Enter Author"
-        }
-      }
     },
     genre: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Please Enter Genre"
-        }
-      }
     },
     first_published: {
     type: DataTypes.INTEGER,

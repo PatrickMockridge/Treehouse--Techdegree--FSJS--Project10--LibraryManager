@@ -1,11 +1,7 @@
 (function() {
-
 'use strict';
-
 angular
-
   .module("app")
-
   .controller('bookController', ['dataServiceBooks', 'Pagination', '$routeParams', function(dataServiceBooks, Pagination, $routeParams){
     // define view model
     var vm = this;
@@ -19,13 +15,12 @@ angular
     dataServiceBooks.getCheckedOutBooks(function(response) {
       vm.checkedOutBooks = response.data;
     });
-    //get overdue books
+    // get overdue books
     dataServiceBooks.getOverDueBooks(function(response) {
       vm.overdueBooks = response.data;
     });
- //new book object
+    // new book object
     vm.newBook = {};
-
     // add a book
     vm.addBook = function() {
         // add the recipe and then go to the detail screen
@@ -54,13 +49,14 @@ angular
       // get book details based upon ID
       vm.getID = function() {
         dataServiceBooks.getID(vm.ID, function(response) {
-          console.log(response.data[0]);
           vm.bookDetails = response.data[0];
         });
       };
-      // execute get ID function 
+      // execute get ID function
       vm.getID();
-   //vm.pagination = Pagination.getNew(10);
-   //vm.pagination.numPages = Math.ceil(vm.getAllBooks.length/vm.pagination.perPage)
+
+      //vm.pagination = Pagination.getNew(10);
+      //vm.pagination.numPages = Math.ceil(vm.getAllBooks.length/vm.pagination.perPage)
+
 }]);
 })();

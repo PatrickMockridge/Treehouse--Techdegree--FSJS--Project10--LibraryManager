@@ -1,11 +1,9 @@
 (function() {
-
   'use strict';
-
      angular
        .module('app')
        .config(['$routeProvider', config]);
-    //
+    
      function config($routeProvider) {
        $routeProvider
          .when('/', {
@@ -44,7 +42,7 @@
            templateUrl: '/views/checked_books.html'
          })
          .when('/overdue_loans', {
-           controller: 'bookController',
+           controller: 'loanController',
            controllerAs: 'vm',
            templateUrl: '/views/overdue_loans.html'
          })

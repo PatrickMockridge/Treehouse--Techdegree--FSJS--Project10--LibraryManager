@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, '/client')));
 app.use('/api/books', books);
 app.use('/api/loans', loans);
 app.use('/api/patrons', patrons);
-//app.use('/api/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

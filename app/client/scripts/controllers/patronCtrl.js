@@ -1,21 +1,17 @@
 (function() {
-
 'use strict';
-
 angular
-
   .module("app")
-
   .controller('patronController', ['dataServicePatrons', '$routeParams', function (dataServicePatrons, $routeParams) {
     // define view model
     var vm = this;
     // get ID from route params
     vm.ID = $routeParams.id;
-    //get all books
+    // get all books
     dataServicePatrons.getAll(function(response) {
       vm.getAllPatrons = response.data;
     });
-   //new patron object
+   // new patron object
     vm.newPatron = {};
     // add a patron
     vm.addPatron = function() {
@@ -29,7 +25,7 @@ angular
         vm.errorMessages = error.data.errors;
     });
     };
-
+    //update a patron 
     vm.updatePatron = function() {
       dataServicePatrons.putID(vm.ID, updateObject, function(response) {
           vm.success = "Book Successfully Updated!";
@@ -48,7 +44,7 @@ angular
       vm.patronDetails = response.data[0];
       });
     };
-    // execute get specific patron function 
+    // execute get specific patron function
     vm.getID();
 }]);
 })();

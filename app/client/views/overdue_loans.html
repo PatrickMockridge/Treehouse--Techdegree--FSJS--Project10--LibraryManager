@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="loan in vm.getOverDueLoans">
+            <tr ng-repeat="loan in vm.overdueLoans">
                 <td><a ng-href="#/books/{{book._id}}">{{loan.book.title}}</a></td>
                 <td><a ng-href="#/patrons{{patron._id}}">{{loan.patron.first_name}} {{loan.patron.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>

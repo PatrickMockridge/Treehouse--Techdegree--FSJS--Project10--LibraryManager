@@ -48,7 +48,12 @@ router.get('/:id', function(req, res, next) {
 
 /* GET overdue loans. */
 router.get('/get/overdue', function(req, res, next) {
-  loans.findAll({where: { return_by: { $lt: new Date() }, returned_on: null }}).then(function(loans){
+  loans.findAll({where: { return_by: { $lt: new Date() },
+  returned_on: null },
+  include: [{ model: books }, { model: patrons }]
+})
+
+  .then(function(loans){
     res.json(loans);
     })
     .catch(function(error){
