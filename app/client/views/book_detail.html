@@ -35,7 +35,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="loan in vm.bookDetails.loans">
-                <td><a ng-href="#/books/{{loan.book_id}}">{{bookDetails.title}}</a></td>
+                <td><a ng-href="#/books/{{loan.book_id}}">{{vm.bookDetails.title}}</a></td>
                 <td><a href="#/patrons/{{loan.patron_id}}">{{loan.patron.first_name}} {{loan.patron.last_name}}</a></td>
                 <td>{{loan.loaned_on}}</td>
                 <td>{{loan.return_by}}</td>

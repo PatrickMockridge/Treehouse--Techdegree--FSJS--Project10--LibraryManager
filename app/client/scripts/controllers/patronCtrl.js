@@ -25,9 +25,9 @@ angular
         vm.errorMessages = error.data.errors;
     });
     };
-    //update a patron 
+    //update a patron
     vm.updatePatron = function() {
-      dataServicePatrons.putID(vm.ID, updateObject, function(response) {
+      dataServicePatrons.putID(vm.ID, vm.patronDetails, function(response) {
           vm.success = "Book Successfully Updated!";
           vm.failure = false;
           vm.book = response.data;

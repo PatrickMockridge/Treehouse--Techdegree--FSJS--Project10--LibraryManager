@@ -48,7 +48,7 @@ angular
       };
     // update loan function
     vm.updateLoan = function() {
-      dataServiceLoans.putID(vm.ID, vm.loan, function(response) {
+      dataServiceLoans.putID(vm.ID, vm.loanDetails, function(response) {
           vm.success = "Loan Sucessfully Updated!";
           vm.failure = false;
             }, function(reason) {

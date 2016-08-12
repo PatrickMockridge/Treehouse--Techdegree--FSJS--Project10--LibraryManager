@@ -12,7 +12,7 @@
     <p><strong>Loaned By: </strong>{{vm.loanDetails.patron.first_name}} {{vm.loanDetails.patron.last_name}}</p>
     <p><strong>Loaned On: </strong>{{vm.loanDetails.loaned_on}}</p>
     <p><strong>Return By: </strong>{{vm.loanDetails.return_by}}</p>
-        <p> <label for="returned_on">Returned on:</label><input id="returned_on" type="text" ng-init="vm.loanDetails.return_by=returnDate" ng-model="vm.loanDetails.returned_on"></p>
+        <p> <label for="returned_on">Returned on:</label><input id="returned_on" type="text" ng-model="vm.loanDetails.returned_on"></p>
         <p><a class="button" value="Return Book" href="" ng-click="vm.updateLoan()">Return Book</a></p>
         <p ng-if="vm.success">{{vm.success}}</p>
         <div ng-if="vm.failure">

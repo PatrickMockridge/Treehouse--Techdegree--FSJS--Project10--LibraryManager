@@ -35,7 +35,7 @@ angular
       };
       // update book
       vm.updateBook = function() {
-        dataServiceBooks.putID(vm.ID, vm.book, function(response) {
+        dataServiceBooks.putID(vm.ID, vm.bookDetails, function(response) {
           console.log(response);
           vm.success = "Book Successfully Updated!";
           vm.failure = false;
